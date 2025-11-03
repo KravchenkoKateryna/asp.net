@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - JobPortal</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="bg-primary text-white p-3 mb-4">
+        <div class="container">
+            <h1 class="display-6">JobPortal</h1>
+            <p class="lead">Портал вакансій для роботодавців і кандидатів</p>
+        </div>
+    </header>
+
+    <main class="container mb-5">
+        @RenderBody()
+    </main>
+
+    <footer class="bg-light text-center py-3 border-top">
+        <div class="container">
+            <p class="mb-0">&copy; @DateTime.Now.Year — JobPortal. Усі права захищено.</p>
+        </div>
+    </footer>
+
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
