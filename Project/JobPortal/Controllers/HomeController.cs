@@ -1,25 +1,38 @@
 using Microsoft.AspNetCore.Mvc;
 using JobPortal.Models;
 using JobPortal.Models.ViewModels;
+using System.Linq;
 
 namespace JobPortal.Controllers
 {
     public class HomeController : Controller
     {
         private readonly IPortalRepository repository;
-        private const int PageSize = 4; // кількість вакансій на сторінці
+        private const int PageSize = 4;
 
         public HomeController(IPortalRepository repo)
         {
             repository = repo;
         }
 
-        public IActionResult Index(int page = 1)
+        public IActionResult Index(string? location, int page = 1)
         {
-            var vacancies = repository.Vacancies
+            // Фільтрація за локацією
+            var filteredVacancies = repository.Vacancies;
+
+            if (!string.IsNullOrEmpty(location))
+            {
+                filteredVacancies = filteredVacancies
+                    .Where(v => v.Location == location);
+            }
+
+            int totalItems = filteredVacancies.Count();
+
+            var vacancies = filteredVacancies
                 .OrderBy(v => v.VacancyID)
                 .Skip((page - 1) * PageSize)
-                .Take(PageSize);
+                .Take(PageSize)
+                .ToList();
 
             var viewModel = new VacanciesListViewModel
             {
@@ -28,9 +41,12 @@ namespace JobPortal.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Vacancies.Count()
-                }
+                    TotalItems = totalItems
+                },
+                CurrentLocation = location
             };
+
+            ViewBag.SelectedLocation = location;
 
             return View(viewModel);
         }

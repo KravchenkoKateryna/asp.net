@@ -7,17 +7,7 @@
 <div class="row">
     @foreach (var v in Model.Vacancies)
     {
-        <div class="col-md-4 mb-4">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title">@v.Title</h5>
-                    <h6 class="card-subtitle text-muted">@v.Company</h6>
-                    <p class="card-text mt-2">@v.Description</p>
-                    <p><strong>Місцезнаходження:</strong> @v.Location</p>
-                    <p><strong>Зарплата:</strong> @v.Salary.ToString("C", new System.Globalization.CultureInfo("uk-UA"))</p>
-                </div>
-            </div>
-        </div>
+        <partial name="_VacancySummary" model="v" />
     }
 </div>
 
@@ -27,7 +17,12 @@
         @for (int i = 1; i <= Model.PagingInfo.TotalPages; i++)
         {
             <li class="page-item @(i == Model.PagingInfo.CurrentPage ? "active" : "")">
-                <a class="page-link" asp-action="Index" asp-route-page="@i">@i</a>
+                <a class="page-link"
+                   asp-action="Index"
+                   asp-route-page="@i"
+                   asp-route-location="@Model.CurrentLocation">
+                    @i
+                </a>
             </li>
         }
     </ul>

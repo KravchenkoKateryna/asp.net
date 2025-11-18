@@ -1,0 +1,23 @@
+﻿@model IEnumerable<string>
+
+<div class="list-group">
+
+    <a class="list-group-item list-group-item-action
+       @(ViewBag.SelectedLocation == null ? "active" : "")"
+       asp-controller="Home"
+       asp-action="Index"
+       asp-route-location="">
+        Усі локації
+    </a>
+
+    @foreach (var loc in Model)
+    {
+        <a class="list-group-item list-group-item-action
+           @(ViewBag.SelectedLocation == loc ? "active" : "")"
+           asp-controller="Home"
+           asp-action="Index"
+           asp-route-location="@loc">
+            @loc
+        </a>
+    }
+</div>

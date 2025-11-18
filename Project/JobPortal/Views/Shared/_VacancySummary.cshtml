@@ -1,0 +1,23 @@
+﻿@model JobPortal.Models.Vacancy
+
+<div class="col-md-4 mb-4">
+    <div class="card h-100 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Title</h5>
+            <h6 class="card-subtitle text-muted">@Model.Company</h6>
+            <p class="card-text mt-2">@Model.Description</p>
+            <p><strong>Місцезнаходження:</strong> @Model.Location</p>
+            <p>
+                <strong>Зарплата:</strong>
+                @Model.Salary.ToString("C", new System.Globalization.CultureInfo("uk-UA"))
+            </p>
+        </div>
+        <a asp-controller="Apply"
+           asp-action="Apply"
+           asp-route-vacancyId="@Model.VacancyID"
+           class="btn btn-outline-primary mt-3">
+            Подати заявку
+        </a>
+
+    </div>
+</div>

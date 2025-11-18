@@ -16,9 +16,22 @@
         </div>
     </header>
 
-    <main class="container mb-5">
-        @RenderBody()
-    </main>
+    <div class="container mb-5">
+        <div class="row">
+
+            <!-- Sidebar -->
+            <div class="col-3">
+                @await Component.InvokeAsync("NavigationMenu",
+                         new { selectedLocation = ViewBag.SelectedLocation })
+            </div>
+
+            <!-- Main content -->
+            <div class="col-9">
+                @RenderBody()
+            </div>
+
+        </div>
+    </div>
 
     <footer class="bg-light text-center py-3 border-top">
         <div class="container">

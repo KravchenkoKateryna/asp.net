@@ -1,0 +1,27 @@
+﻿@model JobPortal.Models.ViewModels.ApplicationViewModel
+
+<h3>Заявка на вакансію: @Model.Vacancy.Title</h3>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Application.VacancyID" />
+
+    <div class="mb-3">
+        <label class="form-label">Ваше ім'я</label>
+        <input asp-for="Application.ApplicantName" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input asp-for="Application.Email" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Повідомлення</label>
+        <textarea asp-for="Application.Message" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">
+        Надіслати заявку
+    </button>
+</form>
